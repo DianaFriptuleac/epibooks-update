@@ -18,7 +18,7 @@ class SingleBook extends Component {
       <Col xs={12} md={6} lg={3} key={this.props.libro.asin}>
          <Card
           className={`mb-4 h-100 ${isSelected ? "border border-danger border-3" : ""}`}
-          onClick={onBookClick}
+          onClick={() => onBookClick(libro.asin)}
           style={{ cursor: "pointer" }}
         >
           <Card.Img

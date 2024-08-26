@@ -21,6 +21,7 @@ class AddComment extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    console.log("Submit chiamato con:", this.state.personalComment);
 
     fetch("https://striveschool-api.herokuapp.com/api/comments/", {
       method: 'POST',
@@ -30,21 +31,30 @@ class AddComment extends Component {
       },
       body: JSON.stringify(this.state.personalComment),
     })
-      .then((response) => {
+    .then((response) => {
+        console.log("Risposta della chiamata:", response);
         if (response.ok) {
-          alert('Commento salvato!');
-          this.setState({
-            personalComment: {
-              comment: '',
-              rate: '',
-              elementId: this.props.asin,
-            },
-          });
+          return response.json();
         } else {
-          alert('Errore nella chiamata API!');
+          throw new Error("Errore nella chiamata API!");
+        }
+      })
+      .then((data) => {
+        console.log("Dati ricevuti:", data);
+        alert('Commento salvato!');
+        this.setState({
+          personalComment: {
+            comment: '',
+            rate: '',
+            elementId: this.props.asin,
+          },
+        });
+        if (this.props.onSuccess) {
+          this.props.onSuccess();
         }
       })
       .catch((err) => {
+        console.error('Errore:', err);
         alert('Errore: ' + err);
       });
   };
