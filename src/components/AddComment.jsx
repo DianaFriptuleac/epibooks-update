@@ -10,6 +10,20 @@ class AddComment extends Component {
     }
   };
 
+  componentDidUpdate = (prevProps) => {
+    if (prevProps.asin !== this.props.asin) {
+      // ora manteniamo aggiornato elementId in this.state.personalComment
+      this.setState({
+        personalComment: {
+          ...this.state.personalComment,
+          elementId: this.props.asin,
+          // ora l'asin nello state è aggiornato con il valore ricevuto nelle props
+          // (valore che abbiamo ricevuto quando abbiamo cliccato su un nuovo libro)
+        },
+      });
+    }
+  }
+
   handleInputChange = (e, property) => {
     this.setState({
       personalComment: {
@@ -42,6 +56,8 @@ class AddComment extends Component {
       .then((data) => {
         console.log("Dati ricevuti:", data);
         alert('Commento salvato!');
+
+        this.props.changeUpdateCommentsList()
         this.setState({
           personalComment: {
             comment: '',
@@ -49,9 +65,6 @@ class AddComment extends Component {
             elementId: this.props.asin,
           },
         });
-        if (this.props.onSuccess) {
-          this.props.onSuccess();
-        }
       })
       .catch((err) => {
         console.error('Errore:', err);
@@ -91,10 +104,10 @@ class AddComment extends Component {
                   value={this.state.personalComment.comment}
                 />
               </Form.Group>
-                <div className="d-flex justify-content-center mb-3">
-              <Button variant="success" type="submit" className="mt-3">
-                Invia Commento
-              </Button>
+              <div className="d-flex justify-content-center mb-3">
+                <Button variant="success" type="submit" className="mt-3">
+                  Invia Commento
+                </Button>
               </div>
             </Form>
           </Col>

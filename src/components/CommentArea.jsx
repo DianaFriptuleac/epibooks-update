@@ -5,7 +5,33 @@ import AddComment from "./AddComment";
 class CommentArea extends Component {
   state = {
     comments: [], // Inizializzo lo stato per i commenti
+    updateCommentsList: false,
   };
+
+  changeUpdateCommentsList = () => {
+    this.setState({
+      updateCommentsList: !this.state.updateCommentsList,
+    })
+  }
+
+  componentDidMount = () => {
+    this.fetchComments()
+  }
+
+
+  componentDidUpdate = (prevProps, prevState) => {
+    if (prevProps.asin !== this.props.asin) {
+      // abbiamo cliccato su un nuovo libro!
+      this.fetchComments()
+    }
+
+    if (prevState.updateCommentsList !== this.state.updateCommentsList) {
+      this.fetchComments()
+      // recupero nuovamente i commenti anche quando cambia la variabile di stato
+      // (updateCommentsList) che avevo creato per avvisarmi di quanto AddComment
+      // posta con successo una recensione
+    }
+  }
 
   fetchComments = () => {
     fetch(`https://striveschool-api.herokuapp.com/api/comments/${this.props.asin}`, {
@@ -29,21 +55,7 @@ class CommentArea extends Component {
       });
   };
 
-  componentDidMount() {
-    console.log("componenteDidMount");
-    this.fetchComments();
-  }
-
-  componentDidUpdate(prevProps) {
-    if (this.props.asin !== prevProps.asin) {
-      this.fetchComments();
-    }
-  }
-  // richiedo un nuovo fetch dei commenti dal server per aggiornare lo stato comments con i dati più recenti.
-  handleCommentAdded = () => {
-    this.fetchComments();
-  };
-
+ 
   deleteComment = (commentId) => {
     fetch(`https://striveschool-api.herokuapp.com/api/comments/${commentId}`, {
       method: "DELETE",
@@ -71,8 +83,8 @@ class CommentArea extends Component {
       <div className="bg-light my-3">
         <h4 className="text-center pt-2">Commenti</h4>
         <CommentList comments={this.state.comments} onDelete={this.deleteComment} />
-        {/*sincronizzaro lo stato dei commenti nel CommentArea con quello aggiunto con AddComment. */}
-        <AddComment asin={this.props.asin} onSuccess={this.handleCommentAdded}/>
+        <AddComment asin={this.props.asin} changeUpdateCommentsList={this.changeUpdateCommentsList}/>
+           {/* prop drilling: prendo una prop da sopra, SingleBook, a sotto, AddComment */}
       </div>
     );
   }

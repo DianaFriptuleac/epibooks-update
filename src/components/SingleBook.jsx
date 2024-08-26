@@ -12,30 +12,29 @@ class SingleBook extends Component {
 
   render() {
 
-    const { libro, isSelected, onBookClick } = this.props;
 
     return (
       <Col xs={12} md={6} lg={3} key={this.props.libro.asin}>
          <Card
-          className={`mb-4 h-100 ${isSelected ? "border border-danger border-3" : ""}`}
-          onClick={() => onBookClick(libro.asin)}
+          className={`mb-4 h-100 ${this.props.isSelected ? "border border-danger border-3" : ""}`}
+          onClick={() => this.props.onBookClick(this.props.libro.asin)}
           style={{ cursor: "pointer" }}
         >
           <Card.Img
             variant="top"
             className="card-img-top"
-            src={libro.img}
+            src={this.props.libro.img}
           />
           <Card.Body className="pb-0">
             <Card.Title className="title-overflow">
-              {libro.title}
+              {this.props.libro.title}
             </Card.Title>
             <div className="d-flex justify-content-center">
               <Button
                 variant="danger"
                 className="text-center px-3 text-light mb-3"
               >
-                {libro.price} $
+                {this.props.libro.price} $
               </Button>
             </div>
           </Card.Body>

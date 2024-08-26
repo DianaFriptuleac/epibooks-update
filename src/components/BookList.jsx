@@ -11,7 +11,7 @@ class BookList extends Component {
 
   state = {
     searchBook: "",
-    selectedBookAsin: null, // Stato per tracciare il libro selezionato
+    selectedBookAsin: '', // Stato per tracciare il libro selezionato, posso mettere anche null
   };
 
   //cambiamento del campo di recerca
@@ -21,17 +21,14 @@ class BookList extends Component {
 
   //filtro i libri
   filtraLibri = () => {
-    const { searchBook } = this.state;
-    const { libri } = this.props;
-
-    return libri.filter((book) =>
-      book.title.toLowerCase().includes(searchBook.toLowerCase())
+  return this.props.libri.filter((book) =>
+      book.title.toLowerCase().includes(this.state.searchBook.toLowerCase())
     );
   };
   // Gestione della selezione del libro
   handleBookSelection = (asin) => {
    if(this.state.selectedBookAsin === asin){
-    this.setState({selectedBookAsin: null})
+    this.setState({selectedBookAsin:''})
    }else{
     this.setState({selectedBookAsin: asin})
    }
@@ -40,10 +37,10 @@ class BookList extends Component {
   render() {
     const filteredBook = this.filtraLibri();
     return (
-      <Container fluid className="mx-3">
+      <Container fluid className="mx-1">
         <Row>
           {/* Colonna dei libri */}
-          <Col md={8}>
+          <Col xs={12} md={8}>
             <Row>
               <Col className="my-3 d-flex justify-content-center">
                 <Form.Control
@@ -68,7 +65,7 @@ class BookList extends Component {
           </Col>
 
           {/* Colonna di CommentArea */}
-          <Col md={4}>
+          <Col xs={12} md={4}>
             {this.state.selectedBookAsin ? (
               <CommentArea asin={this.state.selectedBookAsin} />
             ) : (
