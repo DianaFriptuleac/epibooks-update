@@ -35,4 +35,31 @@
   to {
     transform: rotate(360deg);
   }
-}
+}.footerLi ul li{
+  text-decoration: none;
+  }
+  .small-alert {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem; 
+    max-width: 300px; 
+    margin: 0 auto; 
+  }
+  .card-img-top {
+    height: 75%;
+    object-fit: cover;
+  }
+  .title-overflow{
+    height: 2em;    
+    overflow:hidden;   
+    text-overflow:ellipsis;   
+    white-space: nowrap;    
+    cursor: pointer;     
+  }
+  .expanded-text{
+    height: auto;             
+    white-space:normal;     
+    } 
+  
+  .myHeader{
+    background-color:rgb(242, 233, 222);
+  }

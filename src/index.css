@@ -5,6 +5,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: url("https://media.istockphoto.com/id/985285168/it/foto/biblioteca-sfocata-viola-chiaro-libreria-a-casa-per-uno-sfondo-leggero-concetto-di.jpg?s=612x612&w=0&k=20&c=Q2lGEVbmByJ4U6R3yK5mOh4QvSHVIKorQvykm2V9DIc=");
+  background-repeat: repeat;
 }
 
 code {

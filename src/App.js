@@ -1,24 +1,37 @@
-import logo from './logo.svg';
+
+import 'bootstrap/dist/css/bootstrap.min.css' ;
 import './App.css';
+import MyNav from './components/MyNav';
+import MyFooter from './components/MyFooter';
+import Welcome from './components/Welcome';
+//import AllTheBooks from './components/AllTheBooks';
+//import SingleBook from './components/SingleBook';
+import fantasy from './assets/books/fantasy.json'
+import BookList from './components/BookList';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <>
+      <header className='myHeader'>
+    <MyNav/>
+    <h1 className='text-center mt-3 display-2 fw-bold'> Epicode Books</h1>
+    <Welcome className='small-alert'/>
       </header>
+   
+    <main>
+    <div>
+   
     </div>
+    <div>
+      {/*<AllTheBooks/>*/}
+      {/*<SingleBook libro={fantasy[0]} />*/}
+      <BookList libri ={fantasy}/>
+    </div>
+    </main>
+    <footer>
+    <MyFooter/>
+    </footer>
+    </>
   );
 }
 
