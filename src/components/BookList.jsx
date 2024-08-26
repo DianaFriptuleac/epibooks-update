@@ -66,7 +66,7 @@ class BookList extends Component {
        {/* Colonna di CommentArea */}
             <Col md={4}>
             {this.state.selectedBookAsin ?
-           (<CommentArea asin= {this.state.selectedBookAsin}/>) : (<h4>Selezionare un libro per i commenti</h4>)}
+           (<CommentArea asin= {this.state.selectedBookAsin}/>) : (<h4 className="mt-2">Selezionare un libro per i commenti</h4>)}
             </Col>
         </Row>
       </Container>

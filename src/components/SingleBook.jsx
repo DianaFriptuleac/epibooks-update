@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Col, Card, Button } from "react-bootstrap";
-import CommentArea from "./CommentArea";
+
 
 
 class SingleBook extends Component {
@@ -38,12 +38,6 @@ class SingleBook extends Component {
                 {libro.price} $
               </Button>
             </div>
-            {/*Mostro CommentArea solo se selected e aggiungo stopPropagation per impedire la chiusura della sezione commenti  */}
-            {isSelected && (
-              <div onClick={(e) => e.stopPropagation()}>
-                <CommentArea asin={libro.asin} />
-              </div>
-            )}
           </Card.Body>
         </Card>
       </Col>
