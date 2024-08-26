@@ -1,6 +1,7 @@
 import { Component } from "react";
 import { Container, Row, Form, Col} from "react-bootstrap";
 import SingleBook from "./SingleBook";
+import CommentArea from "./CommentArea";
 
 class BookList extends Component {
   // BookList nasce per ricevere dalle props un ARRAY di libri!
@@ -35,9 +36,12 @@ class BookList extends Component {
   };
 
   render() {
-    const filteredBook = this.filtraLibri()
+    const filteredBook = this.filtraLibri();
     return (
-      <Container>
+      <Container fluid className="mx-3">
+        <Row>
+             {/* Colonna dei libri */}
+            <Col md={8}>
         <Row>
             <Col className="my-3 d-flex justify-content-center">
             <Form.Control
@@ -56,6 +60,14 @@ class BookList extends Component {
             onBookClick={() => this.handleBookSelection(scifiBook.asin)}/>
          
           ))}
+        </Row>
+        </Col>
+      
+       {/* Colonna di CommentArea */}
+            <Col md={4}>
+            {this.state.selectedBookAsin ?
+           (<CommentArea asin= {this.state.selectedBookAsin}/>) : (<h4>Selezionare un libro per i commenti</h4>)}
+            </Col>
         </Row>
       </Container>
     );

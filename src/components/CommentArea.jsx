@@ -38,8 +38,8 @@ class CommentArea extends Component {
 
   render() {
     return (
-      <div>
-        <h4 className="text-center">Commenti</h4>
+      <div className="bg-light my-3">
+        <h4 className="text-center pt-2">Commenti</h4>
        <CommentList comments={this.state.comments}/>
        <AddComment asin={this.props.asin}/>
       </div>

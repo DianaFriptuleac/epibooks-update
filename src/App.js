@@ -25,6 +25,7 @@ function App() {
     <div>
       {/*<AllTheBooks/>*/}
       {/*<SingleBook libro={fantasy[0]} />*/}
+      
       <BookList libri ={fantasy}/>
     </div>
     </main>
